@@ -12,10 +12,36 @@
       crossorigin
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
     ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/babel-standalone@6/babel.min.js"
+    ></script>
     <title>React CDN Counter</title>
   </head>
   <body>
     <h1>React CDN Counter</h1>
     <div id="root">wait...</div>
+    <div id="jsx-root">JSX</div>
+    <!-- <script scrossorigin src="./index.js" type="text/babel"></script> -->
+    <script type="text/babel">
+      window.onload = () => {
+        init();
+        jsxInit();
+      };
+
+      const init = () => {
+        let rootDiv = document.querySelector("#root");
+        let messageElem = React.createElement("p", {}, "Hello React");
+
+        ReactDOM.render(messageElem, rootDiv);
+      };
+
+      const jsxInit = () => {
+        let jsxRootDiv = document.querySelector("#jsx-root");
+        let messageElem = <p>Hello React JSX</p>;
+
+        ReactDOM.render(messageElem, jsxRootDiv);
+      };
+    </script>
   </body>
 </html>

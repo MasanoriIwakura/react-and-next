@@ -21,7 +21,9 @@
   <body>
     <h1>React CDN Counter</h1>
     <div id="root">wait...</div>
+    <button type="button" onclick="doCount()">Add Count</button>
     <div id="jsx-root">JSX</div>
+    <button type="button" onclick="doJsxCount()">Add Count</button>
     <!-- <script scrossorigin src="./index.js" type="text/babel"></script> -->
     <script type="text/babel">
       window.onload = () => {
@@ -29,18 +31,32 @@
         jsxInit();
       };
 
-      const init = () => {
-        let rootDiv = document.querySelector("#root");
-        let messageElem = React.createElement("p", {}, "Hello React");
+      let count = 0;
+      let jsxCount = 0;
 
+      let rootDiv = document.querySelector("#root");
+      let jsxRootDiv = document.querySelector("#jsx-root");
+
+      const init = () => {
+        let messageElem = React.createElement("p", {}, "Hello React");
         ReactDOM.render(messageElem, rootDiv);
       };
 
       const jsxInit = () => {
-        let jsxRootDiv = document.querySelector("#jsx-root");
         let messageElem = <p>Hello React JSX</p>;
-
         ReactDOM.render(messageElem, jsxRootDiv);
+      };
+
+      const doCount = () => {
+        count++;
+        let elem = React.createElement("p", {}, `count: ${count}`);
+        ReactDOM.render(elem, rootDiv);
+      };
+
+      const doJsxCount = () => {
+        jsxCount++;
+        let elem = <p>count:{jsxCount}</p>;
+        ReactDOM.render(elem, jsxRootDiv);
       };
     </script>
   </body>

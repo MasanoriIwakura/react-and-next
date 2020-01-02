@@ -24,6 +24,7 @@
     <button type="button" onclick="doCount()">Add Count</button>
     <div id="jsx-root">JSX</div>
     <button type="button" onclick="doJsxCount()">Add Count</button>
+    <div id="counter">counter</div>
     <script type="text/babel">
       window.onload = () => {
         init();
@@ -57,6 +58,18 @@
         let elem = <p>count:{jsxCount}</p>;
         ReactDOM.render(elem, jsxRootDiv);
       };
+
+      let countDom = document.querySelector("#counter");
+      let counter = 0;
+      setInterval(() => {
+        counter++;
+        let el = (
+          <div>
+            <p>count: {counter}</p>
+          </div>
+        );
+        ReactDOM.render(el, countDom);
+      }, 1000);
     </script>
   </body>
 </html>

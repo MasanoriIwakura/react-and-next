@@ -25,6 +25,9 @@
     <div id="jsx-root">JSX</div>
     <button type="button" onclick="doJsxCount()">Add Count</button>
     <div id="counter">counter</div>
+    <div id="component">component</div>
+    <div id="class-component">class-component</div>
+    <div id="square">square</div>
     <script type="text/babel">
       window.onload = () => {
         init();
@@ -70,6 +73,90 @@
         );
         ReactDOM.render(el, countDom);
       }, 1000);
+
+      let componentDom = document.querySelector("#component");
+      const Hello = props => {
+        return <p style={props.style}>Hello, {props.name}</p>;
+      };
+
+      const redStyle = {
+        color: "red",
+        fontSize: "2rem"
+      };
+      const blueStyle = {
+        color: "blue",
+        fontSize: "2rem"
+      };
+      const greenStyle = {
+        color: "green",
+        fontSize: "2rem"
+      };
+      let componentElement = (
+        <div>
+          <Hello name="Taro" style={redStyle} />
+          <Hello name="Jiro" style={blueStyle} />
+          <Hello name="Saburo" style={greenStyle} />
+        </div>
+      );
+      ReactDOM.render(componentElement, componentDom);
+
+      let classComponentDom = document.querySelector("#class-component");
+
+      class Hello2 extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          return <p>Hello2</p>;
+        }
+      }
+
+      let classEl = (
+        <div>
+          <Hello2 />
+        </div>
+      );
+      ReactDOM.render(classEl, classComponentDom);
+
+      let squareDom = document.querySelector("#square");
+
+      class Square extends React.Component {
+        x = 0;
+        y = 0;
+        width = 0;
+        height = 0;
+        color = "white";
+        style = {};
+
+        constructor(props) {
+          super(props);
+          this.x = props.x;
+          this.y = props.y;
+          this.width = props.w;
+          this.height = props.h;
+          this.color = props.c;
+          this.style = {
+            backgroundColor: this.color,
+            position: "absolute",
+            left: this.x + "px",
+            top: this.y + "px",
+            width: this.width + "px",
+            height: this.height + "px"
+          };
+        }
+
+        render() {
+          return <div style={this.style}></div>;
+        }
+      }
+      let squareEl = (
+        <div>
+          <Square x="300" y="100" w="100" h="100" c="cyan" />
+          <Square x="350" y="150" w="100" h="100" c="magenta" />
+        </div>
+      );
+      ReactDOM.render(squareEl, squareDom);
     </script>
   </body>
 </html>
